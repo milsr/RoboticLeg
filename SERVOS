@@ -1,26 +1,106 @@
+CODIGO RODILLA
+
 #include <Servo.h>
 
+
 // Define el pin al que está conectado el servo
-int servoPin = 9;
+int servoPin = 8;
+
 
 // Crea un objeto Servo para controlar el servo motor
 Servo miServo;
+
 
 void setup() {
   // Inicializa el servo en el pin especificado
   miServo.attach(servoPin);
 }
 
+
 void loop() {
-  // Mueve el servo a la posición 0 grados
-  miServo.write(0);
-  delay(1000); // Espera 1 segundo
+  miServo.write(90);  // Ajusta este valor para el límite mínimo.
+  delay(1000);
+  miServo.write(170);  // Ajusta este valor para el límite máximo.
+  delay(1000);
+  miServo.write(0);  // Ajusta este valor para el límite mínimo.
 
-  // Mueve el servo a la posición 90 grados
-  miServo.write(90);
-  delay(1000); // Espera 1 segundo
 
-  // Mueve el servo a la posición 180 grados
-  miServo.write(180);
-  delay(1000); // Espera 1 segundo
+
+
 }
+
+CODIGO DEL TOBILLO
+
+#include <Servo.h>
+
+
+Servo miServo2;  // Crea un objeto de tipo Servo para controlar un servo motor.
+
+
+void setup() {
+  miServo2.attach(9);
+ 
+}
+
+
+void loop() {
+  miServo.write(80);  // Ajusta este valor para el límite mínimo.
+  delay(1000);
+  miServo.write(170);  // Ajusta este valor para el límite máximo.
+  delay(1000);
+  miServo.write(0);  // Ajusta este valor para el límite mínimo.
+
+
+}
+
+CODIGO FUNCIONAMIENTO CONJUNTO 
+
+#include <Servo.h>
+
+
+// Definir los pines de control de los servos
+const int servoPin1 = 8;
+const int servoPin2 = 9;
+
+
+// Crear objetos de servo
+Servo servo1;
+Servo servo2;
+
+
+void setup() {
+  // Attachtar los servos a los pines correspondientes
+  servo1.attach(servoPin1);
+  servo2.attach(servoPin2);
+}
+
+
+void loop() {
+  // Mover ambos servos en la misma dirección
+  moveServos(80, 80);  // Ángulo deseado para ambos servos
+
+
+  delay(1000); // Esperar 1 segundo
+
+
+  // Mover ambos servos en la dirección opuesta
+  moveServos(170, 180);  // Ángulos deseados para ambos servos
+
+
+  delay(1000); // Esperar 1 segundo
+}
+
+
+// Función para mover ambos servos al mismo tiempo
+void moveServos(int angleServo1, int angleServo2) {
+  // Mover el primer servo
+  servo1.write(angleServo1);
+  delay(1500); // Dar tiempo para que el servo se mueva
+
+
+  // Mover el segundo servo
+  servo2.write(angleServo2);
+  delay(1500); // Dar tiempo para que el servo se mueva
+}
+
+
