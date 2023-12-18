@@ -1,9 +1,8 @@
-
 #include <SoftwareSerial.h>
 #include <Servo.h>
 
 // Configuración de la comunicación Bluetooth a través de SoftwareSerial
-SoftwareSerial BT(10, 11); // RX, TX for Bluetooth
+SoftwareSerial BT(10, 11); // Definir pines RX y TX para la comunicación Bluetooth
 char estado;
 char verifica1 = 'n';
 char verifica2 = 'p';
@@ -16,54 +15,54 @@ Servo servo1;
 Servo servo2;
 
 void setup() {
-  Serial.begin(9600);    // Inicialización de la comunicación serial por USB
-  BT.begin(9600);        // Inicialización de la comunicación serial para el módulo Bluetooth
-  Serial.println("Ready"); // Mensaje indicando que el sistema está listo
+  Serial.begin(9600);    // Iniciar la comunicación serial por USB
+  BT.begin(9600);        // Iniciar la comunicación serial para el módulo Bluetooth
+  Serial.println("Ready"); // Imprimir mensaje indicando que el sistema está listo
 
-  servo1.attach(servoPin1); // Inicialización del servo1 en el pin correspondiente
-  servo2.attach(servoPin2); // Inicialización del servo2 en el pin correspondiente
+  servo1.attach(servoPin1); // Inicializar servo1 en el pin correspondiente
+  servo2.attach(servoPin2); // Inicializar servo2 en el pin correspondiente
 }
 
 void loop() {
   if (BT.available()) {    // Verificar si hay datos disponibles en el módulo Bluetooth
     estado = BT.read();     // Leer un byte del módulo Bluetooth
-    Serial.println(estado); // Imprimir el byte en el monitor serial (para propósitos de depuración)
+    Serial.println(estado); // Imprimir el byte en el monitor serial (depuración)
   }
 
   //************************************************************** 
   if (estado == 'm') {
-    verifica1 = 'm';
+    verifica1 = 'm'; // Establecer verifica1 en 'm' si el estado es 'm'
   }
 
   if (estado == 'n') {
-    verifica1 = 'n';
+    verifica1 = 'n'; // Establecer verifica1 en 'n' si el estado es 'n'
   }
 
   if (estado == 'a' && verifica1 == 'm') {
-    rodilla(); // Llamar a la función rodilla si se cumplen ciertas condiciones
+    rodilla(); // Llamar a la función rodilla si se cumplen condiciones
   }
   //**************************************************************
 
   //************************************************************** 
   if (estado == 'o') {
-    verifica2 = 'o';
+    verifica2 = 'o'; // Establecer verifica2 en 'o' si el estado es 'o'
   }
 
   if (estado == 'p') {
-    verifica2 = 'p';
+    verifica2 = 'p'; // Establecer verifica2 en 'p' si el estado es 'p'
   }
 
   if (estado == 'b' && verifica2 == 'o') {
-    tobillo(); // Llamar a la función tobillo si se cumplen ciertas condiciones
+    tobillo(); // Llamar a la función tobillo si se cumplen condiciones
   }
   //************************************************************** 
 
   //**************************************************************   
   if (estado == 'q') {
-    verifica3 = 'q';
+    verifica3 = 'q'; // Establecer verifica3 en 'q' si el estado es 'q'
   }
   if (estado == 'r') {
-    verifica3 = 'r';
+    verifica3 = 'r'; // Establecer verifica3 en 'r' si el estado es 'r'
   }
 
   if (estado == 'c' && verifica3 == 'q') {
@@ -76,24 +75,24 @@ void loop() {
 }
 
 void moveServos(int angleServo1, int angleServo2) {
-  servo1.write(angleServo1); // Mover el servo1 a la posición especificada
+  servo1.write(angleServo1); // Mover servo1 a la posición especificada
   delay(1500);               // Esperar un tiempo
-  servo2.write(angleServo2); // Mover el servo2 a la posición especificada
+  servo2.write(angleServo2); // Mover servo2 a la posición especificada
   delay(1500);               // Esperar un tiempo
 }
 
 void rodilla() {
-  servo1.write(80);    // Ajustar este valor para el límite mínimo del servo1
+  servo1.write(80);    // Ajustar para el límite mínimo de servo1
   delay(3000);
-  servo1.write(160);   // Ajustar este valor para el límite máximo del servo1
+  servo1.write(160);   // Ajustar para el límite máximo de servo1
   delay(3000);
-  servo1.write(0);     // Ajustar este valor para el límite mínimo del servo1
+  servo1.write(0);     // Ajustar para el límite mínimo de servo1
 }
 
 void tobillo() {
-  servo2.write(80);    // Ajustar este valor para el límite mínimo del servo2
+  servo2.write(80);    // Ajustar para el límite mínimo de servo2
   delay(3000);
-  servo2.write(180);   // Ajustar este valor para el límite máximo del servo2
+  servo2.write(180);   // Ajustar para el límite máximo de servo2
   delay(3000);
-  servo2.write(0);     // Ajustar este valor para el límite mínimo del servo2
+  servo2.write(0);     // Ajustar para el límite mínimo de servo2
 }
