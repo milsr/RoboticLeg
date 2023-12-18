@@ -1,3 +1,4 @@
+
 #include <SoftwareSerial.h>
 #include <Servo.h>
 
@@ -67,9 +68,9 @@ void loop() {
 
   if (estado == 'c' && verifica3 == 'q') {
     moveServos(80, 80);     // Llamar a la función moveServos con ciertos valores
-    delay(1000);
+    delay(1500);
     moveServos(170, 180);   // Llamar a la función moveServos con otros valores
-    delay(1000);
+    delay(1500);
   }
   //**************************************************************    
 }
@@ -82,17 +83,17 @@ void moveServos(int angleServo1, int angleServo2) {
 }
 
 void rodilla() {
-  servo1.write(90);    // Ajustar este valor para el límite mínimo del servo1
-  delay(1000);
-  servo1.write(170);   // Ajustar este valor para el límite máximo del servo1
-  delay(1000);
+  servo1.write(80);    // Ajustar este valor para el límite mínimo del servo1
+  delay(3000);
+  servo1.write(160);   // Ajustar este valor para el límite máximo del servo1
+  delay(3000);
   servo1.write(0);     // Ajustar este valor para el límite mínimo del servo1
 }
 
 void tobillo() {
   servo2.write(80);    // Ajustar este valor para el límite mínimo del servo2
-  delay(1000);
-  servo2.write(170);   // Ajustar este valor para el límite máximo del servo2
-  delay(1000);
+  delay(3000);
+  servo2.write(180);   // Ajustar este valor para el límite máximo del servo2
+  delay(3000);
   servo2.write(0);     // Ajustar este valor para el límite mínimo del servo2
 }
