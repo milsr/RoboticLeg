@@ -3,42 +3,40 @@
 const int servoPin1 = 8;
 const int servoPin2 = 9;
 
-Servo myservo1; // Cambiado el nombre del servo a myservo
-Servo myservo2; 
-
+Servo myservo1; // Declarar un objeto de servo y cambiar su nombre a myservo1
+Servo myservo2;
 
 void setup() {
-  Serial.begin(9600);    // Inicialización de la comunicación serial por USB
-  Serial.println("Ready"); // Mensaje indicando que el sistema está listo
+  Serial.begin(9600);    // Inicializar la comunicación serial por USB
+  Serial.println("Ready"); // Imprimir mensaje indicando que el sistema está listo
 
-  myservo1.attach(servoPin1); // Inicialización del myservo en el pin correspondiente
-  myservo2.attach(servoPin2);
-  
+  myservo1.attach(servoPin1); // Inicializar myservo1 en el pin correspondiente
+  myservo2.attach(servoPin2); // Inicializar myservo2 en el pin correspondiente
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    char data = Serial.read();
-     Serial.println(data); 
-     
+  if (Serial.available() > 0) { // Verificar si hay datos disponibles en la comunicación serial
+    char data = Serial.read();   // Leer un carácter de la comunicación serial
+    Serial.println(data);        // Imprimir el carácter en el monitor serial (depuración)
+
+    // Controlar los servos basándose en los datos recibidos
     if (data == 'a') {
-      myservo1.write(90);
+      myservo1.write(90); // Mover myservo1 a la posición 90 grados
     }
     if (data == 'b') {
-      myservo1.write(110);
+      myservo1.write(110); // Mover myservo1 a la posición 110 grados
     }
     if (data == 'c') {
-      myservo1.write(150);
+      myservo1.write(150); // Mover myservo1 a la posición 150 grados
     }
-     if (data == 'd') {
-      myservo2.write(80);
+    if (data == 'd') {
+      myservo2.write(80); // Mover myservo2 a la posición 80 grados
     }
     if (data == 'e') {
-      myservo2.write(90);
+      myservo2.write(90); // Mover myservo2 a la posición 90 grados
     }
     if (data == 'f') {
-      myservo2.write(160);
+      myservo2.write(160); // Mover myservo2 a la posición 160 grados
     }
-   
   }
 }
